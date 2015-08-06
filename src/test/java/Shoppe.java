@@ -1,5 +1,4 @@
-import PageObjects.HomePage;
-import PageObjects.MyBasketPage;
+import PageObjects.*;
 import com.thoughtworks.gauge.Step;
 import org.openqa.selenium.support.PageFactory;
 
@@ -31,5 +30,33 @@ public class Shoppe {
     public void checkTotalPrice(String price) {
         MyBasketPage myBasketPage = PageFactory.initElements(DriverFactory.driver, MyBasketPage.class);
         myBasketPage.checkTotal(price);
+    }
+
+    @Step("Checkout items in basket")
+    public void checkoutAllItems() {
+        HomePage homePage = PageFactory.initElements(DriverFactory.driver, HomePage.class);
+        homePage.checkout();
+    }
+
+    @Step("Accept the default address")
+    public void acceptDefaultAddress() {
+        CheckOutPage checkOutPage = PageFactory.initElements(DriverFactory.driver, CheckOutPage.class);
+        checkOutPage.makePayment();
+    }
+
+
+    @Step("Make payment with card number <68628348> and security code <789>")
+    public void makePayment(String cardNumber, String code) {
+        PaymentPage paymentPage = PageFactory.initElements(DriverFactory.driver, PaymentPage.class);
+        paymentPage.enterDetails(cardNumber, code);
+        paymentPage.reviewOrder();
+    }
+
+    @Step("Confirm order submission")
+    public void confirmOrder() {
+        ConfirmationPage confirmationPage = PageFactory.initElements(DriverFactory.driver, ConfirmationPage.class);
+        confirmationPage.reviewOrder();
+        HomePage homePage = PageFactory.initElements(DriverFactory.driver, HomePage.class);
+        homePage.checkIfOrderIsPlaced();
     }
 }

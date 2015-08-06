@@ -13,3 +13,10 @@ Add items to basket
 * Add item "Yealink T20P" to my basket
 * Check if my basket has item "Yealink T20P"
 * Check if total price is "$75.59"
+
+Checkout an item
+----------------
+* Add item "Yealink T20P" to my basket
+* Checkout cart with default address
+* Make payment with card number "68628348" and security code "789"
+* Confirm order submission
